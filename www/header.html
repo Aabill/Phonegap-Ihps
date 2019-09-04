@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="js/jquery-3.3.1.slim.min.js" ></script>
+    <script type="text/javascript" charset="utf-8" src="js/jquery min-3.3.1.js"></script>
+    <script src="js/popper.min.js" ></script>
+    <script src="js/bootstrap.min.js" ></script>
+    
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.css">
+    <script defer src="js/all.js"></script> 
+   
+    <script>
+       $(document).ready(function(e) {
+      $(document).on('click', function (e){
+    /* bootstrap collapse js adds "in" class to your collapsible element*/
+    var menu_opened = $('#alignment-example').hasClass('in');
+  
+  if(!$(e.target).closest('#alignment-example').length &&
+      !$(e.target).is('#alignment-example') &&
+      menu_opened === true){
+          $('#alignment-example').collapse('toggle');
+  }
+
+});
+       });
+    </script>
+    
+    
+    </head>
+    <body class="bg-light>">
+           
+            
+        <style>
+           
+
+           
+            #navbar {
+   
+                   position:fixed;
+                   z-index: +5;
+                   top: 0;
+                   width: 100%;
+                   display: block;
+                   transition: top 0.3s; /* Transition effect when sliding down (and up) */
+            
+                   
+            }
+            
+
+            footer {
+                /* just for demo */
+                 background-color: #f8f8f8;
+                   border-top: 1px solid #E7E7E7;
+               text-align:center;
+                   padding:10px;
+                 /* just for demo */ 
+  
+                 position: fixed;
+                 
+                  left: 0;
+                  bottom: 0;
+                 height: 40px;
+                 width: 100%;
+                }
+        </style>
+        
+        <nav class="navbar navbar-default" id="navbar">
+            <div class="container-fluid">
+
+                    <!--<div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="slide-collapse" data-target="#slide-navbar-collapse" aria-expanded="false">
+                              <span class="sr-only">Toggle navigation</span>
+                              <span class="icon-bar"></span>
+                              <span class="icon-bar"></span>
+                              <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="index.html"><img height="20" alt="ihps" src="img/nav-logo.png" /></a>
+                          </div>
+                          
+                          <div class="collapse navbar-collapse" id="slide-navbar-collapse">
+                            <ul class="nav navbar-nav">
+                              
+                              <li><a href="#"></a></li>
+                              <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                  <li><a href="#">Action</a></li>
+                                  <li><a href="#">Another action</a></li>
+                                  <li><a href="#">Something else here</a></li>
+                                  <li role="separator" class="divider"></li>
+                                  <li><a href="#">Separated link</a></li>
+                                  <li role="separator" class="divider"></li>
+                                  <li><a href="#">One more separated link</a></li>
+                                </ul>
+                              </li>
+                            </ul>
+                            
+                            <ul class="nav navbar-nav navbar-right">
+                              <li><a href="#">Link</a></li>
+                              <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                  <li><a href="#">Action</a></li>
+                                  <li><a href="#">Another action</a></li>
+                                  <li><a href="#">Something else here</a></li>
+                                  <li role="separator" class="divider"></li>
+                                  <li><a href="#">Separated link</a></li>
+                                </ul>
+                              </li>
+                            </ul>
+                          </div>-->
+            
+            <!-- BRAND -->
+            <div class="navbar-header">
+            
+            <button type="button" id='navbar_baby' class="navbar-toggle collapsed" data-toggle="collapse" data-target="#alignment-example" aria-expanded="false" aria-controls='main-navigation'>
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html"><img height="20" alt="ihps" src="img/nav-logo.png" /></a>
+            </div>
+            
+            
+            <div class="collapse navbar-collapse" id="alignment-example">
+            
+            
+            <ul class="nav navbar-nav">
+            <li><a href="test.html"><span class='glyphicon glyphicon-home'></span> My Households</a></li>
+            <li><a href="add.html"><span class='glyphicon glyphicon-plus-sign'></span> Add Household</a></li>
+            
+            <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About Us <span class="caret"></span></a>
+            <ul class="dropdown-menu" aria-labelledby="about-us">
+            <li><a data-toggle="modal" data-target="#Ourstory">Our story</a></li>
+            <li><a data-toggle="modal" data-target="#Ourteam">Our Team</a></li>
+            <li><a data-toggle="modal" data-target="#ContactUs">Contact Us</a></li>
+            
+            </ul>
+            </li>
+            </ul>
+            
+            
+            </div>
+            
+            </div>
+            </nav>
+       <div class="menu-overlay"></div>
+        
+
+
+            <!-- The modal Our Story -->
+<div class="modal fade" id="Ourstory" tabindex="-1" role="dialog" aria-labelledby="modalLabelLarge" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+    
+    <div class="modal-header center_mo">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title" id="modalLabelLarge">Our story</h4>
+    </div>
+    
+    <div class="modal-body center_mo">
+    <div class='well'>
+      <p>Maysa a tarawen ket ada nakita mi nga puraw nga bukel, ana ngata atoy? Ngem, malpas manu a minuto ket ada manen nakita mi nga bukbukel ngem tatta
+        ket nalabbaga, nangisit, ken nasileng a bukel. Nagdidinamag kami nu ana nga bukel dagitoy ket ijay mi na-amwan nga nu puraw ti bukel, tambu-tambung. Nu nalabbaga met ti bukel,
+        bubuggayu. Nu nangisit met ti bukel, takki kalding. Ngarud, nu nasileng ti bukel, ukel-ukel.
+      </p>
+    </div>
+    </div>
+    
+    </div>
+    </div>
+    </div>
+    <!-- The modal Our Team -->
+<div class="modal fade" id="Ourteam" tabindex="-1" role="dialog" aria-labelledby="modalLabelLarge" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+    
+    <div class="modal-header center_mo">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title" id="modalLabelLarge">Our team</h4>
+    </div>
+    
+    <div class="modal-body center_mo">
+    <div class='well'>
+        <img height="20" alt="ihps" src="img/nav-logo.png" />
+    </div>
+    </div>
+    
+    </div>
+    </div>
+    </div>
+    <!-- The modal Contact Us -->
+<div class="modal fade" id="ContactUs" tabindex="-1" role="dialog" aria-labelledby="modalLabelLarge" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+    
+    <div class="modal-header center_mo">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title" id="modalLabelLarge">Contact Us</h4>
+    </div>
+    
+    <div class="modal-body center_mo">
+    <div class='well'>
+        0926-7915-067
+    </div>
+    </div>
+    
+    </div>
+    </div>
+    </div>
+
+
+
+        <script>
+            var prevScrollpos = window.pageYOffset;
+            window.onscroll = function() {
+                var currentScrollPos = window.pageYOffset;
+                 if (prevScrollpos > currentScrollPos) {
+                 document.getElementById("navbar").style.top = "0";
+            } else {
+                    document.getElementById("navbar").style.top = "-50px";
+            }
+                prevScrollpos = currentScrollPos;
+                }
+
+                $('[data-toggle="slide-collapse"]').on('click', function() {
+  $navMenuCont = $($(this).data('target'));
+  $navMenuCont.animate({
+    'width': 'toggle'
+  }, 350);
+  $("#outtouched").fadeIn(500);
+
+});
+//$("#outtouched").click(function(event) {
+  //$(".navbar-toggle").trigger("click");
+  //$("#outtouched").fadeOut(500);
+//});   
+           
+        </script>
+        
+            
+
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        
+    </body>
+</html>

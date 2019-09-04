@@ -1,0 +1,160 @@
+                               <form>
+                                    <legend><h4><span class='glyphicon glyphicon-plus-sign'></span> Add Member</h4></legend>
+                                    
+                                      <input type='text' id='id_mamen' style='display:none;'>
+                                        
+                                        <div class='row'>
+                                            
+                                            <div class='col-xs-12'>
+                                                <label for='member_firstname'>Full name</label>
+                                                <div class='input-group'>
+                                                <input type='text' class='form-control' name='member_firstname' id="member_firstname" required
+                                                placeholder='First name'  >
+                                                <span class='input-group-btn' style='width:0px;'></span>
+                                            
+                                                <input type='text' class='form-control' name='member_middlename' id="member_middlename" required
+                                                placeholder='Middle name' >
+                                                <span class='input-group-btn' style='width:0px;'></span>
+                                            
+                                                <input type='text' class='form-control' name='member_lastname' id='member_lastname'
+                                                placeholder='Last name'>
+                                                </div>
+                                            </div>
+                                            <div class='col-xs-12'>
+                                            <label for='member_ext'>Extension Name?</label>
+                                                <input type="checkbox" ng-model="mem_ext_yes" name="member_ext" id="member_ext_check"  aria-label="Toggle ngShow">Yes
+                                       
+                                                    <div class="check-element funky-show-hide" ng-show="mem_ext_yes">
+
+                                                        <select class='form-control ' id='mem_ext' name='member_ext'>
+                                                   
+                                                            <option ng-repeat="x in name_extension"
+                                                        value="{{x.value}}">{{x.label}}</option>
+                                                    
+                                                    </select>
+                                                    </div>
+                                            </div>
+                                            
+                                        </div><br>
+
+                                        
+
+                                        <div class='row'>
+                                                
+                                            
+
+                                            <div class='col-xs-12' >
+                                                    <label for='head_years_addr'>Years living in current address</label>
+                                                    <select class='form-control' name='head_years_addr' ng-model="selectedYear" id="member_years_address" required>
+                                                        <option value='' disabled selected>Select</option>
+                                                        <option ng-repeat="curYear in years" value="{{curYear.value}}">{{curYear.label}}</option>
+                                                    </select>
+                                                    
+                                            </div>
+
+                                            <div class='col-xs-5'><br>
+                                                    <label for='member_relationship'>Relationship</label>
+                                                    
+                                                    <select class='form-control rel' name='member_relationship' id="member_relationship" required onclick='get_rel(this);'>
+                                                        <option value='' disabled selected>Select</option>
+                                                        <option ng-repeat="x in relationship" value="{{x.value}}">{{x.value}}</option>
+                                                    </select>
+                                                    
+                                            </div>
+
+                                            <div class='col-xs-7'><br>
+                                                <label for='member_2_sex'>Sex</label>
+
+                                                       <div class="btn-group btn-group-toggle btn-block" data-toggle="buttons">
+                                                            <label class="btn btn-outline-secondary" id='male_btn'>Male
+ 
+                                                            <input type="radio" class="form-control-sm" name="member_sex" id='rel_male' 
+                                                            value="MALE"><svg class="svg-inline--fa fa-male fa-w-6" aria-hidden="true" data-prefix="fas" data-icon="male" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512" data-fa-i2svg=""><path fill="currentColor" d="M96 0c35.346 0 64 28.654 64 64s-28.654 64-64 64-64-28.654-64-64S60.654 0 96 0m48 144h-11.36c-22.711 10.443-49.59 10.894-73.28 0H48c-26.51 0-48 21.49-48 48v136c0 13.255 10.745 24 24 24h16v136c0 13.255 10.745 24 24 24h64c13.255 0 24-10.745 24-24V352h16c13.255 0 24-10.745 24-24V192c0-26.51-21.49-48-48-48z"></path></svg>                                             
+
+                                                            </label>
+                                                            <label class="btn btn-outline-secondary" id='female_btn'>Female
+
+                                                            <input type="radio" class="form-control-sm" name="member_sex" id='rel_female'
+                                                            value="FEMALE"><svg class="svg-inline--fa fa-female fa-w-8" aria-hidden="true" data-prefix="fas" data-icon="female" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" data-fa-i2svg=""><path fill="currentColor" d="M128 0c35.346 0 64 28.654 64 64s-28.654 64-64 64c-35.346 0-64-28.654-64-64S92.654 0 128 0m119.283 354.179l-48-192A24 24 0 0 0 176 144h-11.36c-22.711 10.443-49.59 10.894-73.28 0H80a24 24 0 0 0-23.283 18.179l-48 192C4.935 369.305 16.383 384 32 384h56v104c0 13.255 10.745 24 24 24h32c13.255 0 24-10.745 24-24V384h56c15.591 0 27.071-14.671 23.283-29.821z"></path></svg>
+
+                                                            </label>
+                                                    </div>
+                                            </div>
+
+                                            <div class="col-xs-12"><br>
+                                                <label for='head_occupation'>Occupation</label>
+
+                                                    <input type="text" class='form-control' placeholder='Occupation' name='head_occupation' id="member_occupation" >
+                                            </div>
+
+                                            <div class="col-xs-12"><br>
+                                                <label for='member_birthdate'>Birthdate</label>
+                                                <input type='date' class='form-control' name='member_birthdate' id='member_birthdate'  ng-model='date_time.startdatefromcontroller'>
+                                                    
+                                                
+                                            </div>
+
+                                            <div class="col-xs-12"><br>
+                                                <label for="head_birthdate_place">Place of Birth</label>
+                                                <div class='input-group col-xs-12'>
+                                                <input type="text" class='form-control' name="head_birthdate_place" placeholder="City/Municipality" id="member_birthplace_municipality" >
+                                                <span class='input-group-btn' style='width:0px;'></span>
+                                                <input type="text" class='form-control' name="head_birthdate_place" value="Nueva Vizcaya" id="member_birthplace_province" >
+                                                </div>
+                                            </div>
+
+                                            <div class='col-xs-12'><br>
+                                                <label for='head_phil_status_type'>Philhealth Status and Type</label>
+                                                <div class='input-group col-xs-12'>
+                                                    <select class='form-control' name='head_phil_status_type' id="member_phil_status" >
+                                                        <option value='' disabled selected>Select</option>
+                                                        <option ng-repeat="curPhil_status in Phil_status"
+                                                        value='{{curPhil_status.value}}'>{{curPhil_status.value}}</option>
+                                                    </select>
+                                                    <span class='input-group-btn' style='width:0px;'></span>
+                                                    <select class='form-control' name='head_phil_status_type' id="member_phil_type" >
+                                                        <option value='' disabled selected>Select</option>
+                                                        <option ng-repeat="curPhil_type in Phil_type"
+                                                        value='{{curPhil_type.value}}'>{{curPhil_type.value}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class='col-xs-3'></div>
+                                            <div class='col-xs-3'></div>
+                                            <div class='col-xs-3'></div>
+                                            <div class='col-xs-3'><br>
+                                                <button type='submit' class='form-control btn btn-primary' onclick='addName_Member();' ><span class='glyphicon glyphicon-check'></span></button>
+                                            </div>
+                                                
+                                        </div>
+                                    </form>
+
+                                       
+
+
+
+                                        <script>
+                                        $("#member_ext_check").change(function(event){
+                                        if (this.checked){}
+                                        else {
+                                        $('#mem_ext option:eq(0)').prop('selected', true)
+                                        }
+
+                                       
+                                        });
+                                        function get_rel($var){
+                                            if ($var.value == 'HEAD' || $var.value == 'SON' || $var.value == 'STEP-SON'){
+                                                $('#rel_male').prop('checked',true);
+                                                $('#male_btn').addClass('active');
+                                                $('#female_btn').removeClass('active').addClass('btn btn-outline-secondary');
+                                                
+                                            }
+                                            else if($var.value==''){}
+                                            else{
+                                                $('#rel_female').prop('checked',true);
+                                                $('#male_btn').removeClass('active').addClass('btn btn-outline-secondary');
+                                                $('#female_btn').addClass('active');
+                                                
+                                            }
+                                        }
+                                        </script>

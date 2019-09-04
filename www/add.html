@@ -1,0 +1,1459 @@
+
+<html>
+    <head>
+        <title>My Data</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <script type="text/javascript" charset="utf-8" src="js/jquery min-3.3.1.js"></script>
+        <script type="text/javascript" src="js/angular.min.js"></script>
+        <script src="js/scopedata.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script src="js/add.js"></script>
+        
+        
+        <script type="text/javascript">
+            $(document).ready(function(e) {
+                $('#header').load('header.html');
+                init();
+
+              
+            });
+            function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+            //$('html, body').animate({scrollTop:0}, 'fast');
+            }
+        </script>
+        
+        
+
+        
+        <link type="text/css" rel="stylesheet" href="css/loader.css">
+        <link type="text/css" rel="stylesheet" href="css/bootstrap.css">
+    </head>
+    
+
+    
+    <body onload="myFunction();" class="bg-light" ng-app="demoApp" ng-controller="mainController">
+            <div id="loadermamen">
+                    <div class="containerloader">
+                           
+                    <div class="dot-container">
+                        <img height="25" alt="ihps" src="img/nav-logo.png" />
+                        <div class="dot dot-1"></div>
+                        <div class="dot dot-2"></div>
+                        <div class="dot dot-3"></div>
+                        
+                    </div>
+                    </div>
+            </div>
+        <div id="myDiv">
+        <div id="header"></div>
+        <br/><br/><br/>
+        
+            <div class="container-fluid" id="outtouched">
+                <h3>New Household</h3>
+                
+                <form>
+                        <hr>
+                        <div class="container" >
+                            <fieldset>
+                            <div class='panel-group' id='accordion'>
+                                <div class='panel panel-default'>
+                                    <div class='panel-heading'>
+                                        <h5 class='panel-title'>
+                                            <a data-toggle='collapse' data-parent='#accordion' 
+                                                href='#collapseOne' onclick="topFunction();">Basic Info</a>
+                                        </h5>
+                                    </div>
+                                    <div id='collapseOne' class='panel-collapse collapse in'>
+                                    <div class='panel-body'>
+                                            <input type='hidden' value="02-50-04" id="HH_SERIAL_NO">
+                                            <label for='date_profiled'>Date Profiled:</label>
+                                            <input type='date'  name='date_profiled' id='HH_date_profiled' class='form-control' ng-model='date_time.startdatefromcontroller' /><br>
+                                            <div class="row">
+                                                <div class='col-xs-6'>
+                                                    <label for='nhts'>NHTS:</label>
+                                                     <input type="checkbox" ng-model="checked_nhts_yes" name="nhts" id='nhts_yes' value='NO' >Yes
+                                                 </div>
+                                                 <div class="col-xs-6">
+                                                    <label for='four_ps'>4PS:</label>
+                                                    <input type="radio"  name='four_ps' value='YES'>Yes
+                                                    <input type="radio"  name='four_ps' value='NO' checked>No
+                                                 </div>
+                                            </div><br>
+                                            <div class="check-element funky-show-hide" ng-show="checked_nhts_yes">
+                                            <label for='nhts_no'>NHTS No.</label>
+                                            <input type="text" class='form-control' id="nhts_no" placeholder="NHTS No."><br>
+                                            </div>
+                                            <div class='row'>
+        
+                                                    <div class='col-xs-12'>
+                                                    <label  for='HH_lastname'>Family name</label>
+
+                                                    <input type='text' class='form-control'  id='HH_lastname' ng-model='HH_Head_lastname' required
+                                                    placeholder='Family name' value='{{famlastname}}'>
+                                                    
+                                                    
+                                                    
+    
+                                               </div> <br>
+                                                
+                                            </div>
+                                            
+                                            
+    
+                                        <br>
+                                            <label for='input-contact'>Contact no.</label>
+                                            <div class='input-group'>
+                                                <span class="input-group-addon">+63</span>
+                                                <input type='text' class='form-control form-control-lg' name='input-contact' id='contact' placeholder='9XX XXXX XXX'>
+                                            </div><br>
+                                                <label for="input-membercount">NO. OF HH MEMBERS:</label>
+                                                <select name="membercount" id="no_members" ng-model="selectMember" class="form-control" required>
+                                                    
+                                                    <option ng-repeat='x in no_members' value='{{x.value}}'>{{x.label}}</option>
+                                                </select><br>
+                                                <label for="ip_group">Indigenous People Group</label>
+                                                <select class='form-control' name='ip_group' id='ip_group'>
+                                                    
+                                                    <option ng-repeat="x in ip_group" value="{{x.value}}">{{x.label}}</option>
+                                                </select>
+
+                                    </div>
+                                </div>
+                            </div>
+                                
+                                        
+                                            
+                                            
+                                            
+                                            
+                                    
+                                
+                                <div class='panel panel-default'>
+                                        <div class='panel-heading'>
+                                            <h5 class='panel-title'>
+                                                <a data-toggle='collapse' data-parent='#accordion' 
+                                                href='#collapseTwo' id='click_address' onclick="topFunction();">Address</a>
+                                            </h5>
+                                        </div>
+                                        <div id='collapseTwo' class='panel-collapse collapse'>
+                                            <div class='panel-body'>
+                                                    <div class="row">
+                                        
+                                                            <!--<div class="form-row">-->
+                                                                <div class="col-xs-6">
+                                                                    <label for="address_houseno">House No.</label>
+                                                                    <input type="text" class='form-control' id='address_houseno' placeholder='House #'>
+                                                                </div>
+                                                                <div class="col-xs-6">
+                                                                    <label for="address_street">Street</label>
+                                                                    <input type="text" class='form-control' id='address_street' placeholder='Street name'>
+                                                                </div>
+                                                            <!--</div>-->
+                                                            <!--<div class='form-row'>-->
+                                                                <div class='col-xs-6'><br>
+                                                                    <label for='address_purok'>Sitio Purok</label>
+                                                                    <select name='address_purok' class='form-control' id='sitio_purok'>
+                                                                        <option value='' hidden>Purok</option>
+                                                                        <option value='1' >1</option>
+                                                                        <option value='2'>2</option>
+                                                                        <option value='3'>3</option>
+                                                                        <option value='4'>4</option>
+                                                                        <option value='5'>5</option>
+                                                                        <option value='6'>6</option>
+                                                                        <option value='7'>7</option>
+                                                                        <option value='8'>8</option>
+                                                                        <option value='9'>9</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class='col-xs-6'><br>
+                                                                        <label for='address_barangay'>Barangay</label>
+                                                                        <select name='address_barangay' class='form-control' ng-model="barangaymen" id='bgy_add' required>
+                         
+                                                                            <option ng-repeat="x in Address_Barangay"
+                                                                            value="{{x.value}}">{{x.label}}</option>
+                                                                        </select>
+                                                                        
+                                                                </div>
+                    
+                                                                <div class="col-xs-6"><br>
+                                                                        <label for="address_Municipality">City/Municipality</label>
+                                                                        <input type="text" class='form-control' id='address_Municipality' value='Bambang'>
+                                                                </div>
+                                                                <div class="col-xs-6"><br>
+                                                                    <label for="address_postal_code">Postal code</label>
+                                                                    <input type="text" class='form-control' id='address_postal_code' value='3702'>
+                                                                </div>
+                                                                <div class="col-xs-12"><br>
+                                                                    <label for="address_Province">Province</label>
+                                                                    <input type="text" class='form-control' id='address_Province' value='Nueva,Vizcaya'>
+                                                                </div>
+                                                                
+                                                            <!--</div>-->
+                                                            
+                                                        </div>
+                                            </div>
+                                        </div>
+                                </div>
+                                
+                                
+                                   
+
+
+                                   
+                                   <div class='panel panel-default'>
+                                        <div class='panel-heading'>
+                                            <h5 class='panel-title'>
+                                                <a data-toggle='collapse' data-parent='#accordion' 
+                                                href='#collapseThree'  onclick="topFunction();">Service Delivery Network</a>
+                                            </h5>
+                                        </div>
+                                        <div id='collapseThree' class='panel-collapse collapse'>
+                                            <div class='panel-body'>
+                                                    <div class='row'>   
+                                       
+                                        
+                                    
+                                                            <div class='container'>
+                                                                    <div class='panel-group' id='accordionSDN'>
+                                                                            <div class='panel panel-default'>
+                                                                                <div class='panel-heading'>
+                                                                                    <h5 class='panel-title'>
+                                                                                        <a data-toggle='collapse' data-parent='#accordionSDN' 
+                                                                                        href='#collapseOneSDN' onclick='topFunction();'>Usual Facility</a>
+                                                                                    </h5>
+                                                                                </div>
+                                                                                <div id='collapseOneSDN' class='panel-collapse collapse in'>
+                                                                                    <div class='panel-body'>
+                                                                                            <div class='col-xs-12'>
+                                                                                                    <label for='HH_usual_consult'>Where do you usually go for consultation?</label>
+                                                                                                   
+                                                                                                   <div class="check-element funky-show-hide" ng-hide="HH_usual_consult">
+                                                                                                   <select name='HH_usual_consult' class='form-control' id="HH_usual_consult_select">
+                                                                                                    <option ng-repeat="x in HF_usually_go_for_consult"
+                                                                                                    value="{{x.value}}">{{x.label}}</option>
+                                                                                                    </select>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class='col-xs-12'>
+                                                                                                   <input type='checkbox' id='HH_usual_consult_checkbox' ng-model='HH_usual_consult'>Others, Specify:
+                                                                                                   <div class="check-element funky-show-hide" ng-show="HH_usual_consult">
+                                                                                                    <input type="text" class='form-control' id="HH_usual_consult_others" placeholder="Specify"><br>
+                                                                                                    </div>
+                                                        
+                                                                                               </div>
+                                                                                               <div class='col-xs-12'>
+                                                                                                    <label for='travel_h_to_f_time'>Travel time from house to facility?</label>
+                                                                                                    <div class='input-group col-xs-12'>
+                                                                                                   <select type='text' class='form-control' id='travel_h_to_f_time' placeholder='x mins'>
+                                                                                                        <option ng-repeat="x in travel_time"
+                                                                                                            value="{{x.value}}">{{x.label}}</option>
+                                                                                                   </select>
+                                                                                                   <span class='input-group-btn' style='width:0px;'></span>
+                                                                                                   <select type='text' class='form-control' id='travel_h_to_f_by' placeholder='travel by'>
+                                                                                                    <option ng-repeat="x in travel_by"
+                                                                                                        value="{{x.value}}">{{x.label}}</option>
+                                                                                                    </select>
+                                                                                                   
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class='col-xs-12'><br>
+                                                                                                    <label for='checkbox_services_hf'>What services does it offer?</label>
+                                                                                                    <div class='row'>
+                                                                                                    <div class='col-xs-6'>
+
+                                                                                                        <input type='checkbox' name='checkbox_services_hf' id='usual_hf_service_maternal' value='NO'>Maternal<br>
+                                                                                                        <input type='checkbox' name='checkbox_services_hf' id='usual_hf_service_child' value='NO'>Child<br>
+                                                                                                        <input type='checkbox' name='checkbox_services_hf' ng-model='HH_usual_service_others' id='usual_hf_service_others_check'>Others
+                                                                                                        <div class="check-element funky-show-hide" ng-show="HH_usual_service_others">
+                                                                                                                <input type="text" class='form-control' id="usual_hf_service_others" placeholder="Specify" value='N/A'>
+                                                                                                        </div>
+                                                                    
+                                                                                                    </div>
+                                                                                                    <div class='col-xs-6'>
+                                                                                                        <input type='checkbox' name='checkbox_services_hf' id='usual_hf_service_surgery' value='NO'>Surgery<br>
+                                                                                                        <input type='checkbox' name='checkbox_services_hf' id='usual_hf_service_laboratoy' value='NO'>Laboratory<br>
+                                                                                                        <input type='checkbox' name='checkbox_services_hf' id='usual_hf_service_inpatient' value='NO'>In-Patient
+                                                                                                    </div>
+                                                                                                    </div>
+                                                                                                     
+                                                        
+                                                                                                </div>
+                                                                                                <div class='col-xs-12'><br>
+                                                                                                <label for='checkbox_pay_service'>Did you pay for any service or commodity?</label>
+                                                                                                <div class='row'>
+                                                                                                <div class='col-xs-6'>
+                                                                                                    <input type='radio' name='checkbox_pay_service' id='usual_service_rad1' value='YES'
+                                                                                                     ng-model='usual_hf_service_pay_specify_yes' >Yes
+                                                                                                </div>
+                                                                                                <div class='col-xs-6'>
+                                                                                                    <input type='radio' name='checkbox_pay_service' id='usual_service_rad2' value='NO'
+                                                                                                     ng-model='usual_hf_service_pay_specify_yes'  ng-checked='true'>No
+                                                                                                </div>
+                                                                                                <div class='col-xs-12'>
+                                                                                                        <div class="check-element funky-show-hide" ng-show="usual_hf_service_pay_specify_yes == 'YES'">
+                                                                                                                <input type="text" class='form-control' id="usual_hf_service_pay_comm_others" placeholder="Specify" value='N/A'>
+                                                                                                        </div>
+                                                                                                </div>
+                                                                                                </div>
+                                                                                                </div>
+                                                                                                <div class='col-xs-12'><br>
+                                                                                                    <label for='checkbox_med_hf'>Are there medicines available?</label>
+                                                                                                    <div class='row'>
+                                                                                                    <div class='col-xs-6'>
+                                                                                                        <input type='radio'  name='checkbox_med_hf' id='usual_hf_med_avail_rad1' value='YES'
+                                                                                                         ng-model='usual_hf_med'  ng-checked='true'>Yes
+                                                                                                    </div>
+                                                                                                    <div class='col-xs-6'>
+                                                                                                        <input type='radio' name='checkbox_med_hf' id='usual_hf_med_avail_rad2' value='NO'
+                                                                                                         ng-model='usual_hf_med' >No
+                                                                                                    </div>
+                                                                                                    <div class='col-xs-12'>
+                                                                                                            <div class="check-element funky-show-hide" ng-show="usual_hf_med == 'NO'">
+                                                                                                                    <label for='usual_hf_med_not_avail'>Specify w/c were not available</label>
+                                                                                                                    <input type="text" class='form-control' id="usual_hf_med_not_avail" placeholder="not available" value='N/A'><br>
+                                                                                                                    <label for='usual_hf_where_buy_med'>Where did you buy the meds?</label>
+                                                                                                                    <input type="text" class='form-control' id="usual_hf_where_buy_med" placeholder="where did you buy?" value='N/A'>
+                                                                                                            </div>
+                                                                                                    </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class='col-xs-12'><br>
+                                                                                                    <label for='checkbox_med_hf_pay?'>Did you pay for the medicines?</label>
+                                                                                                    <div class='row'>
+                                                                                                    <div class='col-xs-6'>
+                                                                                                        <input type='radio' name='checkbox_med_hf_pay' id='usual_hf_pay_for_med?' value='YES' ng-checked='true'>Yes
+                                                                                                    </div>
+                                                                                                    <div class='col-xs-6'>
+                                                                                                        <input type='radio' name='checkbox_med_hf_pay' id='usual_hf_pay_for_med' value='NO' >No
+                                                                                                    </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class='panel panel-default'>
+                                                                                    <div class='panel-heading'>
+                                                                                        <h5 class='panel-title'>
+                                                                                            <a data-toggle='collapse' data-parent='#accordionSDN' 
+                                                                                            href='#collapseTwoSDN' onclick='topFunction();'>Gov'n Facility</a>
+                                                                                        </h5>
+                                                                                    </div>
+                                                                                    <div id='collapseTwoSDN' class='panel-collapse collapse'>
+                                                                                        <div class='panel-body'>
+                                                                                                <div class='col-xs-12'>
+                                                                                                        <label for='HH_govt_consult'>What is the nearest government facility?</label>
+                                                                                                        
+                                                                                                       <div class="check-element funky-show-hide" ng-hide="HH_govt_consult">
+                                                                                                       <select name='HH_govt_consult' class='form-control' id="HH_govt_consult_select">
+                                                                                                        <option ng-repeat="x in HF_govt_go_for_consult"
+                                                                                                        value="{{x.value}}">{{x.label}}</option>
+                                                                                                        </select>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    
+                                                                                                   <div class='col-xs-12'><br>
+                                                                                                        <label for='travel_h_to_f_time'>Travel time from house to facility?</label>
+                                                                                                        <div class='input-group col-xs-12'>
+                                                                                                       <select type='text' class='form-control' id='travel_h_to_f_time_govt' placeholder='x mins'>
+                                                                                                            <option ng-repeat="x in travel_time"
+                                                                                                                value="{{x.value}}">{{x.label}}</option>
+                                                                                                       </select>
+                                                                                                       <span class='input-group-btn' style='width:0px;'></span>
+                                                                                                       <select type='text' class='form-control' id='travel_h_to_f_by_govt' placeholder='travel by'>
+                                                                                                        <option ng-repeat="x in travel_by"
+                                                                                                            value="{{x.value}}">{{x.label}}</option>
+                                                                                                    </select>
+                                                                                                       
+                                                                                                   </div>
+                                                                                                    </div>
+                                                                                                    <div class='col-xs-12'><br>
+                                                                                                        <label for='checkbox_services_hf_govt'>What services does it offer?</label>
+                                                                                                        <div class='row'>
+                                                                                                        <div class='col-xs-6'>
+                                                                                                            <input type='checkbox' name='checkbox_services_hf_govt' id='govt_service_maternal' value='NO'>Maternal<br>
+                                                                                                            <input type='checkbox' name='checkbox_services_hf_govt' id='govt_service_child' value='NO'>Child<br>
+                                                                                                            <input type='checkbox' name='checkbox_services_hf_govt' ng-model='HH_usual_service_others_govt' id='govt_service_others_check'>Others
+                                                                                                            <div class="check-element funky-show-hide" ng-show="HH_usual_service_others_govt">
+                                                                                                                    <input type="text" class='form-control' id="govt_service_others" placeholder="Specify" value='N/A'>
+                                                                                                            </div>
+                                                                        
+                                                                                                        </div>
+                                                                                                        <div class='col-xs-6'>
+                                                                                                            <input type='checkbox' name='checkbox_services_hf_govt' id='govt_service_surgery' value='NO'>Surgery<br>
+                                                                                                            <input type='checkbox' name='checkbox_services_hf_govt' id='govt_service_laboratoy' value='NO'>Laboratory<br>
+                                                                                                            <input type='checkbox' name='checkbox_services_hf_govt' id='govt_service_inpatient' value='NO'>In-Patient
+                                                                                                        </div>
+                                                                                                        </div>
+                                                                                                         
+                                                            
+                                                                                                    </div>
+                                                                                                    <div class='col-xs-12'><br>
+                                                                                                    <label for='checkbox_pay_service_govt'>Did you pay for any service or commodity?</label>
+                                                                                                    <div class='row'>
+                                                                                                    <div class='col-xs-6'>
+                                                                                                        <input type='radio' name='checkbox_pay_service_govt' id='govt_service_rad1' value='YES'
+                                                                                                         ng-model='govt_service_pay_specify_yes' >Yes
+                                                                                                    </div>
+                                                                                                    <div class='col-xs-6'>
+                                                                                                        <input type='radio' name='checkbox_pay_service_govt' id='govt_service_rad2' value='NO'
+                                                                                                         ng-model='govt_service_pay_specify_yes'  ng-checked='true'>No
+                                                                                                    </div>
+                                                                                                    <div class='col-xs-12'>
+                                                                                                            <div class="check-element funky-show-hide" ng-show="govt_service_pay_specify_yes == 'YES'">
+                                                                                                                    <input type="text" class='form-control' id="govt_service_pay_comm_others" placeholder="Specify" value='N/A'>
+                                                                                                            </div>
+                                                                                                    </div>
+                                                                                                    </div>
+                                                                                                    </div>
+                                                                                                    <div class='col-xs-12'><br>
+                                                                                                        <label for='checkbox_pay_service_govt_med'>Are there medicines available?</label>
+                                                                                                        <div class='row'>
+                                                                                                        <div class='col-xs-6'>
+                                                                                                            <input type='radio' name='checkbox_pay_service_govt_med' id='govt_med_avail_radio1' value='YES'
+                                                                                                             ng-model='govt_med' ng-checked='true'>Yes
+                                                                                                        </div>
+                                                                                                        <div class='col-xs-6'>
+                                                                                                            <input type='radio' name='checkbox_pay_service_govt_med' id='govt_med_avail_radio2' value='NO'
+                                                                                                             ng-model='govt_med'>No
+                                                                                                        </div>
+                                                                                                        <div class='col-xs-12'>
+                                                                                                                <div class="check-element funky-show-hide" ng-show="govt_med == 'NO'">
+                                                                                                                        <label for='govt_med_not_avail'>Specify w/c were not available</label>
+                                                                                                                        <input type="text" class='form-control' id="govt_med_not_avail" placeholder="not available" value='N/A'><br>
+                                                                                                                        <label for='govt_where_buy_med'>Where did you buy the meds?</label>
+                                                                                                                        <input type="text" class='form-control' id="govt_where_buy_med" placeholder="where did you buy?" value='N/A'>
+                                                                                                                </div>
+                                                                                                        </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class='col-xs-12'><br>
+                                                                                                        <label for='checkbox_med_hf_pay_govt?'>Did you pay for the medicines?</label>
+                                                                                                        <div clas='row'>
+                                                                                                        <div class='col-xs-4'>
+                                                                                                            <input type='radio' name='checkbox_med_hf_pay_govt' id='govt_pay_for_med?' value='YES'ng-checked='true'>Yes
+                                                                                                        </div>
+                                                                                                        <div class='col-xs-4'>
+                                                                                                            <input type='radio' name='checkbox_med_hf_pay_govt' id='govt_pay_for_med?' value='NO'>No
+                                                                                                        </div>
+                                                                                                        <div class='col-xs-4'>
+                                                                                                               <input type='radio' name='checkbox_med_hf_pay_govt' id='govt_pay_for_med?' value='N/A'>N/A
+                                                                                                        </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                            </div>
+                                                                            <div class='panel panel-default'>
+                                                                                    <div class='panel-heading'>
+                                                                                        <h5 class='panel-title'>
+                                                                                            <a data-toggle='collapse' data-parent='#accordionSDN' 
+                                                                                            href='#collapseThreeSDN' onclick='topFunction();'>Pvh Facility</a>
+                                                                                        </h5>
+                                                                                    </div>
+                                                                                    <div id='collapseThreeSDN' class='panel-collapse collapse'>
+                                                                                        <div class='panel-body'>
+                                                                                                <div class='col-xs-12'>
+                                                                                                    <label for='nearest_pvt_hf'>What is the nearest private health facility?</label>
+                                                                                                    <input type='text' id='nearest_pvt_hf' class='form-control' placeholder='nearest pvt. hf.'>
+                                                                                                </div>
+                                                                                                <div class='col-xs-12'><br>
+                                                                                                    <label for='pvt_hf_travel_time'>Travel time from house to facility?</label>
+                                                                                                    <div class='input-group col-xs-12'>
+                                                                                                   <select type='text' class='form-control' id='pvt_hf_travel_time' placeholder='x mins'>
+                                                                                                        <option ng-repeat="x in travel_time"
+                                                                                                            value="{{x.value}}">{{x.label}}</option>
+                                                                                                   </select>
+                                                                                                   <span class='input-group-btn' style='width:0px;'></span>
+                                                                                                   <select type='text' class='form-control' id='pvt_hf_travel_by' placeholder='travel by'>
+                                                                                                    <option ng-repeat="x in travel_by"
+                                                                                                        value="{{x.value}}">{{x.label}}</option>
+                                                                                                    </select>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class='col-xs-12'><br>
+                                                                                                    <label for='checkbox_services_hf_pvt'>What services does it offer?</label>
+                                                                                                    <div class='row'>
+                                                                                                    <div class='col-xs-6'>
+                                                                                                        <input type='checkbox' name='checkbox_services_hf_pvt' id='pvt_service_maternal' value='NO'>Maternal<br>
+                                                                                                        <input type='checkbox' name='checkbox_services_hf_pvt' id='pvt_service_child' value='NO'>Child<br>
+                                                                                                        <input type='checkbox' name='checkbox_services_hf_pvt' ng-model='HH_usual_service_others' id='pvt_service_others_check'>Others
+                                                                                                        <div class="check-element funky-show-hide" ng-show="HH_usual_service_others">
+                                                                                                                <input type="text" class='form-control' id="pvt_service_others" placeholder="Specify" value='N/A'>
+                                                                                                        </div>
+                                                                    
+                                                                                                    </div>
+                                                                                                    <div class='col-xs-6'>
+                                                                                                        <input type='checkbox' name='checkbox_services_hf_pvt' id='pvt_service_surgery' value='NO'>Surgery<br>
+                                                                                                        <input type='checkbox' name='checkbox_services_hf_pvt' id='pvt_service_laboratoy' value='NO'>Laboratory<br>
+                                                                                                        <input type='checkbox' name='checkbox_services_hf_pvt' id='pvt_service_inpatient' value='NO'>In-Patient
+                                                                                                    </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class='col-xs-12'><br>
+                                                                                                    <label for='checkbox_pay_service_pvt_med'>Are there medicines available?</label>
+                                                                                                    <div class='row'>
+                                                                                                    <div class='col-xs-4'>
+                                                                                                        <input type='radio' name='checkbox_pay_service_pvt_med' id='pvt_med_avail_radio1' value='YES'
+                                                                                                         ng-model='pvt_med'>Yes
+                                                                                                    </div>
+                                                                                                    <div class='col-xs-4'>
+                                                                                                        <input type='radio' name='checkbox_pay_service_pvt_med' id='pvt_med_avail_radio2' value='NO'
+                                                                                                         ng-model='pvt_med'>No
+                                                                                                    </div>
+                                                                                                    <div class='col-xs-4'>
+                                                                                                        <input type='radio' name='checkbox_pay_service_pvt_med' id='pvt_med_avail_radio3' value='N/A'
+                                                                                                         ng-model='pvt_med' ng-checked='true'>N/A
+                                                                                                    </div>
+                                                                                                    <div class='col-xs-12'>
+                                                                                                            <div ng-show="pvt_med == 'NO'">
+                                                                                                                    <label for='pvt_med_not_avail'>Specify w/c were not available</label>
+                                                                                                                    <input type="text" class='form-control' id="pvt_med_not_avail" placeholder="not available" value='N/A'><br>
+                                                                                                                    <label for='pvt_where_buy_med'>Where did you buy the meds?</label>
+                                                                                                                    <input type="text" class='form-control' id="pvt_where_buy_med" placeholder="where did you buy?" value='N/A'>
+                                                                                                            </div>
+                                                                                                    </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class='col-xs-12'><br>
+                                                                                                    <label for='emergency_transpo_brgy'>Is there an emergency transport available in barangay?</label>
+                                                                                                    <div class='col-xs-4'>
+                                                                                                        <input type='checkbox' name='emergency_transpo_brgy' id='emergency_transpo_check' ng-model='emg_transpo'>Yes
+                                                                                                    </div>
+                                                                                                    <div class='col-xs-8' ng-show='emg_transpo'>
+                                                                                                        <input type='text' class='form-control' name='emergency_transpo_brgy' id='emergency_transpo_spec' placeholder='Specify' value='NO'>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                            </div>
+                                                                    </div>
+                                                            
+                                                           
+                                                         </div>
+                    
+                                                            <div class='container'><br>
+                                                                
+                                                                 
+                                                             
+                                                            </div>
+                    
+                                                        </div>
+                                            </div>
+                                        </div>
+                                </div>
+                                   
+                              
+                                    <div class='panel panel-default'>
+                                            <div class='panel-heading'>
+                                                <h5 class='panel-title'>
+                                                    <a data-toggle='collapse' data-parent='#accordion' 
+                                                    href='#collapseFour'  onclick="topFunction();">Source/s of Water:</a>
+                                                </h5>
+                                            </div>
+                                            <div id='collapseFour' class='panel-collapse collapse'>
+                                                <div class='panel-body'>
+                                                        <div class='row'>
+                                        
+                                                                <div class='col-xs-12'>
+                                                                    <label for='drinking'>Drinking:</label><br>
+                                                                </div>
+                                                                    <div class='col-xs-6'>
+                                                                        <input type='checkbox' name='drinking' id='drinking_bottled' value='NO'>Bottled water<br>
+                                                                        <input type='checkbox' name='drinking' id='drinking_refilling' value='NO'>Refilling station<br>
+                                                                        <input type='checkbox' name='drinking' id='drinking_nawasa' value='NO'>"NAWASA"<br>
+                                                                        <input type='checkbox' name='drinking' ng-model='drink_others' id='drink_check'>Others<br>
+                                                                    </div>
+                                                                    <div class='col-xs-6'>
+                                                                        <input type='checkbox' name='drinking' id='drinking_pump' value='NO'>Pump well<br>
+                                                                        <input type='checkbox' name='drinking' id='drinking_dug' value='NO'>Dug well<br>
+                                                                        <input type='checkbox' name='drinking' id='drinking_spring' value='NO'>Spring<br>
+                                                                    </div>
+                                                                    <div class='col-xs-12' ng-show='drink_others'>
+                                                                        <input type='text' placeholder='Specify' value='N/A' class='form-control' id='drinking_others'>
+                                                                    </div>
+                                                                <div class='col-xs-12'><br>
+                                                                    <label for='cooking'>Cooking:</label>
+                                                                </div>
+                                                                    <div class='col-xs-6'>
+                                                                        <input type='checkbox' name='cooking' id='cooking_bottled' value='NO'>Bottled water<br>
+                                                                        <input type='checkbox' name='cooking' id='cooking_refilling' value='NO'>Refilling station<br>
+                                                                        <input type='checkbox' name='cooking' id='cooking_nawasa' value='NO'>"NAWASA"<br>
+                                                                        <input type='checkbox' name='cooking' ng-model='cook_others' id='cook_check' value='NO'>Others<br>
+                                                                    </div>
+                                                                    <div class='col-xs-6'>
+                                                                        <input type='checkbox' name='cooking' id='cooking_pump' value='NO'>Pump well<br>
+                                                                        <input type='checkbox' name='cooking' id='cooking_dug' value='NO'>Dug well<br>
+                                                                        <input type='checkbox' name='cooking' id='cooking_spring' value='NO'>Spring<br>
+                                                                    </div>
+                                                                    <div class='col-xs-12' ng-show='cook_others'>
+                                                                            <input type='text' placeholder='Specify' value='N/A' class='form-control' id='cooking_others'>
+                                                                    </div>
+                                                                <div class='col-xs-12'><br>
+                                                                    <label for='domestic'>Domestic purpose (bathing, laundry, etc.):</label>
+                                                                </div>
+                                                                    <div class='col-xs-6'>
+                                                                        <input type='checkbox' name='domestic' id='domestic_nawasa' value='NO'>"NAWASA"<br>
+                                                                        <input type='checkbox' name='domestic' id='domestic_pump' value='NO'>Pump well<br>
+                                                                        <input type='checkbox' name='domestic' ng-model='domest_others' id='domestic_check' value='NO'>Others<br>
+                                                                    </div>
+                                                                    <div class='col-xs-6'>
+                                                                        <input type='checkbox' name='domestic' id='domestic_dug' value='NO'>Dug well<br>
+                                                                        <input type='checkbox' name='domestic' id='domestic_spring' value='NO'>Spring<br>
+                                                                    </div>
+                                                                    <div class='col-xs-12' ng-show='domest_others'>
+                                                                            <input type='text' placeholder='Specify' value='N/A' class='form-control' id='domestic_others'>
+                                                                    </div>
+                                                                    
+                                                            </div>
+                                                </div>
+                                            </div>
+                                    </div>
+                                    
+                                    
+                                    <div class='panel panel-default'>
+                                            <div class='panel-heading'>
+                                                <h5 class='panel-title'>
+                                                    <a data-toggle='collapse' data-parent='#accordion' 
+                                                    href='#collapseFive'  onclick="topFunction();">Sanitation Facilities:</a>
+                                                </h5>
+                                            </div>
+                                            <div id='collapseFive' class='panel-collapse collapse'>
+                                                <div class='panel-body'>
+                                                        <div class='row'>
+                                                                <div class='col-xs-12'>
+                                                                    <label for='own_toilet'>Own a toilet?</label><br>
+                                                                    <div class='col-xs-6'>
+                                                                        <input type='radio' name='own_toilet' id='own_toilet_rad1' ng-model='toilet_show' value='YES' ng-checked='true' required>Yes
+                                                                    </div>
+                                                                    <div class='col-xs-6'>
+                                                                        <input type='radio' name='own_toilet' id='own_toilet_rad2' ng-model='toilet_show' value='NO' required>No
+                                                                    </div>
+                                                                    <div class='col-xs-12' ng-hide="toilet_show == 'NO'" >
+                                                                        <label for='water_sealed'>Water sealed?</label><br>
+                                                                        <div class='col-xs-12'>
+                                                                            <input type='checkbox' name='water_sealed' id='water_sealed_check' value='NO'>Yes (uncheck if no)
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class='col-xs-12' ng-show="toilet_show == 'NO'">
+                                                                            <label for='no_toilet'>If no:</label><br>
+                                                                            <div class='col-xs-12'>
+                                                                                <input type='radio' name='no_toilet' id='no_toilet_rad1' value='N/A' ng-checked='true'>Shared (neighbor/relative)<br>
+                                                                                <input type='radio' name='no_toilet' id='no_toilet_rad2' value='N/A'>Communal<br>
+                                                                                <input type='radio' name='no_toilet' id='no_toilet_rad3' value='N/A'>Not use any toilet
+                                                                            </div>
+                                                                    </div>
+                                                                    <label for='garbage'><br>How is garbage disposed?</label><br>
+                                                                    <div class='col-xs-6'>
+                                                                        <input type='checkbox' name='garbage' id='garbage_collected' value='NO'>Collected<br>
+                                                                        <input type='checkbox' name='garbage' id='garbage_burned' value='NO'>Burned<br>
+                                                                        <input type='checkbox' name='garbage' id='garbage_dumped' value='NO'>Dumped<br>
+                                                                    </div>
+                                                                    <div class='col-xs-6'>
+                                                                        <input type='checkbox' name='garbage' ng-model='garbage_show' id='garbage_check'>Others<br>
+                                                                        <div ng-show='garbage_show'>
+                                                                            <input type='text' class='form-control' placeholder='Specify' id='garbage_others' value='N/A'>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                        
+                        
+                                                            </div>
+                                                </div>
+                                            </div>
+                                    </div>
+                                    
+                                    
+                                    <div class='panel panel-default'>
+                                            <div class='panel-heading'>
+                                                <h5 class='panel-title'>
+                                                    <a data-toggle='collapse' data-parent='#accordion' 
+                                                    href='#collapseSix'  onclick="topFunction();">Health Emergency Management</a>
+                                                </h5>
+                                            </div>
+                                            <div id='collapseSix' class='panel-collapse collapse'>
+                                                <div class='panel-body'>
+                                                        <div class='row'>
+                                                                <div class='col-xs-12'>
+                                                                    <div class='container'>
+                                                                        <label for='HEM'>Are any of the following applicable to your residence?</label>
+                                                                        <div class='container'>
+                                                                            <input type='checkbox' name='HEM' id='beside_highway' value='NO'>Beside the highway<br>
+                                                                            <input type='checkbox' name='HEM' id='coastal_area' value='NO'>Coastal area<br>
+                                                                            <input type='checkbox' name='HEM' id='near_water' value='NO'>Near body of water<br>
+                                                                            <input type='checkbox' name='HEM' id='hx_landslide' value='NO'>History of landslide<br>
+                                                                            <input type='checkbox' name='HEM' id='hx_flooding' value='NO'>History of flooding<br>
+                                                                            <input type='checkbox' name='HEM' id='near_mining' value='NO'>Near mining
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class='container'><br>
+                                                                        <label for='bgy_typhoon'>What does the barangay do in case of a coming typhoon?</label>
+                                                                        <div class='container'>
+                                                                            <input type='text' id='bgy_typhoon' class='form-control' placeholder='type'>
+                                                                        </div>
+                                                                        <br><label for='hh_typhoon'>What does your family do in case of a coming typhoon?</label>
+                                                                        <div class='container'>
+                                                                            <input type='text' id='hh_typhoon' class='form-control' placeholder='type'>
+                                                                        </div>
+                                                                        <br><label for='bgy_flooding'>What does the barangay do in case of flooding/flashfloods?</label>
+                                                                        <div class='container'>
+                                                                            <input type='text' id='bgy_flooding' class='form-control' placeholder='type'>
+                                                                        </div>
+                                                                        <br><label for='hh_flooding'>What does your family do in case of flooding/flashfloods?</label>
+                                                                        <div class='container'>
+                                                                            <input type='text' id='hh_flooding' class='form-control' placeholder='type'>
+                                                                        </div>
+                                                                        <br><label for='hh_earthquake'>What should you do in case of an earthquake?</label>
+                                                                        <div class='container'>
+                                                                            <input type='text' id='hh_earthquake' class='form-control' placeholder='type'>
+                                                                        </div>
+                                                                        <br><label for='nearest_evac_specify'>Know the nearest evacuation center?</label><br>
+                                                                        <div class='col-xs-4'>
+                                                                        <input type='checkbox' name='nearest_evac_specify' ng-model='near_evac_spec' id='nearest_evac_specify_check'>Yes
+                                                                        </div>
+                                                                        <div class='col-xs-8' ng-show='near_evac_spec'>
+                                                                            <input type='text' id='nearest_evac_specify' class='form-control' placeholder='Specify' value='NO'>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                </div>
+                                            </div>
+                                    </div>
+                                    </div>
+                                    
+
+                                    
+                                    
+
+
+
+
+                                   <!--<div ng-if="selectMember=='1'"ng-include="'members/members2.html'"></div>
+                                   <div ng-if="selectMember=='2'"ng-include="'members/members3.html'"></div>-->
+                                    
+                                
+                            </fieldset>
+                            <hr>
+                        </div>
+                        
+                        <div class='container'>
+                            <div class='row'>
+                                <div class='col-xs-3'></div>
+                                <div class='col-xs-3'></div>
+                                <div class='col-xs-3'></div>
+                                <div class='col-xs-3'>
+                                        <button type='submit' onclick="addName();" class='form-control btn btn-primary'><span class='glyphicon glyphicon-check'></span></button>
+                                </div>
+                            </div>
+                        </div>
+
+                </form>
+            </div><br>
+
+            
+                      
+
+        
+
+        
+
+
+       
+       
+       
+       <script>
+
+$("#nhts_yes").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        
+   } else {
+       $('#nhts_no').val('');
+       this.value='NO';
+      
+   }
+});
+
+
+//usual_facility
+//--------
+$("#usual_hf_service_maternal").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert(this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#usual_hf_service_child").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert(this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#usual_hf_service_surgery").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert(this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#usual_hf_service_laboratoy").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert(this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#usual_hf_service_inpatient").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert(this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#usual_hf_service_others_check").change(function(event){
+    if (this.checked){
+        var others = document.getElementById('usual_hf_service_others');
+        others.value = '';
+        alert(others.value);
+   } else {
+        var others = document.getElementById('usual_hf_service_others');
+        others.value = 'N/A';
+        alert(others.value);
+   }
+});
+//--------
+$("#HH_usual_consult_checkbox").change(function(event){
+    if (this.checked){
+        //alert('checked specify');
+        var select = document.getElementById("HH_usual_consult_select");
+        select.value = '';
+   } else {
+       //alert('select');
+       var others = document.getElementById("HH_usual_consult_others");
+        others.value = '';
+      
+      
+   }
+});
+//---------
+$("#usual_service_rad2").change(function(event){
+    if (this.checked){
+        var pay = document.getElementById("usual_hf_service_pay_comm_others");
+        pay.value = 'N/A';
+    }
+
+
+});
+$("#usual_service_rad1").change(function(event){
+    if (this.checked){
+        var pay = document.getElementById("usual_hf_service_pay_comm_others");
+        pay.value = '';
+        
+    }
+
+
+});
+$("#usual_hf_med_avail_rad1").change(function(event){
+    if (this.checked){
+        var not_avail = document.getElementById("usual_hf_med_not_avail");
+        var where_buy = document.getElementById("usual_hf_where_buy_med");
+        not_avail.value = 'N/A';
+        where_buy.value = 'N/A';
+    }
+
+
+});
+$("#usual_hf_med_avail_rad2").change(function(event){
+    if (this.checked){
+        var not_avail = document.getElementById("usual_hf_med_not_avail");
+        var where_buy = document.getElementById("usual_hf_where_buy_med");
+        not_avail.value = '';
+        where_buy.value = '';
+    }
+
+});
+
+
+//govt_facility
+$("#govt_service_maternal").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert(this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#govt_service_child").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert(this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#govt_service_surgery").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert(this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#govt_service_laboratoy").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert(this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#govt_service_inpatient").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert(this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#govt_service_others_check").change(function(event){
+    if (this.checked){
+        var others = document.getElementById('govt_service_others');
+        others.value = '';
+        alert(others.value);
+   } else {
+        var others = document.getElementById('govt_service_others');
+        others.value = 'N/A';
+        alert(others.value);
+   }
+});
+//---------
+$("#govt_service_rad2").change(function(event){
+    if (this.checked){
+        var pay = document.getElementById("govt_service_pay_comm_others");
+        pay.value = 'N/A';
+    }
+
+
+});
+$("#govt_service_rad1").change(function(event){
+    if (this.checked){
+        var pay = document.getElementById("govt_service_pay_comm_others");
+        pay.value = '';
+        
+    }
+
+
+});
+
+$("#govt_med_avail_radio1").change(function(event){
+    if (this.checked){
+        var not_avail = document.getElementById("govt_med_not_avail");
+        var where_buy = document.getElementById("govt_where_buy_med");
+        not_avail.value = 'N/A';
+        where_buy.value = 'N/A';
+    }
+
+
+});
+$("#govt_med_avail_radio2").change(function(event){
+    if (this.checked){
+        var not_avail = document.getElementById("govt_med_not_avail");
+        var where_buy = document.getElementById("govt_where_buy_med");
+        not_avail.value = '';
+        where_buy.value = '';
+    }
+
+
+});
+//-------------
+//pvt -----------
+if($('#nearest_pvt_hf').val('')){
+    $('#pvt_hf_travel_time').val('N/A');
+    $('#pvt_hf_travel_by').val('N/A');
+}
+else{}
+$("#pvt_service_maternal").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert(this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#pvt_service_child").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert(this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#pvt_service_surgery").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert(this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#pvt_service_laboratoy").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert(this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#pvt_service_inpatient").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert(this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#pvt_service_others_check").change(function(event){
+    if (this.checked){
+        var others = document.getElementById('pvt_service_others');
+        others.value = '';
+        alert(others.value);
+   } else {
+        var others = document.getElementById('pvt_service_others');
+        others.value = 'N/A';
+        alert(others.value);
+   }
+});
+$("#pvt_med_avail_radio1").change(function(event){
+    if (this.checked){
+        var not_avail = document.getElementById("pvt_med_not_avail");
+        var where_buy = document.getElementById("pvt_where_buy_med");
+        not_avail.value = 'N/A';
+        where_buy.value = 'N/A';
+        
+    }
+
+
+});
+$("#pvt_med_avail_radio3").change(function(event){
+    if (this.checked){
+        var not_avail = document.getElementById("pvt_med_not_avail");
+        var where_buy = document.getElementById("pvt_where_buy_med");
+        not_avail.value = 'N/A';
+        where_buy.value = 'N/A';
+        
+    }
+});
+$("#pvt_med_avail_radio2").change(function(event){
+    if (this.checked){
+        var not_avail = document.getElementById("pvt_med_not_avail");
+        var where_buy = document.getElementById("pvt_where_buy_med");
+        not_avail.value = '';
+        where_buy.value = '';
+        
+    }
+
+
+});
+//----emg_transpo
+$("#emergency_transpo_check").change(function(event){
+    if (this.checked){
+        var emg = document.getElementById('emergency_transpo_spec');
+        emg.value='';
+        alert(emg.value);
+    }
+    else{
+        var emg = document.getElementById('emergency_transpo_spec');
+        emg.value='NO';
+        alert(emg.value);
+    }
+
+
+});
+
+//-------SOURCES WATER
+//----------drinks
+$("#drinking_bottled").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert(this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#drinking_refilling").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert(this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#drinking_nawasa").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert(this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#drinking_pump").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert(this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#drinking_dug").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert(this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#drinking_spring").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert(this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#drink_check").change(function(event){
+    if (this.checked){
+        var others = document.getElementById('drinking_others');
+        others.value = '';
+        alert(others.value);
+   } else {
+        var others = document.getElementById('drinking_others');
+        others.value = 'N/A';
+        alert(others.value);
+   }
+});
+//--------------cooks
+$("#cooking_bottled").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert(this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#cooking_refilling").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert(this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#cooking_nawasa").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert(this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#cooking_pump").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert(this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#cooking_dug").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert(this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#cooking_spring").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert(this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#cook_check").change(function(event){
+    if (this.checked){
+        var others = document.getElementById('cooking_others');
+        others.value = '';
+        alert(others.value);
+   } else {
+        var others = document.getElementById('cooking_others');
+        others.value = 'N/A';
+        alert(others.value);
+   }
+});
+//-----domestic
+$("#domestic_nawasa").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert(this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#domestic_pump").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert(this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#domestic_dug").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert(this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#domestic_spring").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert(this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#domestic_check").change(function(event){
+    if (this.checked){
+        var others = document.getElementById('domestic_others');
+        others.value = '';
+        alert(others.value);
+   } else {
+        var others = document.getElementById('domestic_others');
+        others.value = 'N/A';
+        alert(others.value);
+   }
+});
+//----------sanitation
+$("#water_sealed_check").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert(this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#own_toilet_rad1").change(function(event){
+    if (this.checked){
+        $("#water_sealed_check"). prop("checked", false);
+        $('#water_sealed_check').val('NO');
+        var no_toilet1 = document.getElementById('no_toilet_rad1');
+        no_toilet1.value='N/A';
+        var no_toilet2 = document.getElementById('no_toilet_rad2');
+        no_toilet2.value='N/A';
+        var no_toilet3 = document.getElementById('no_toilet_rad3');
+        no_toilet3.value='N/A';
+        alert(water_sealed1.value + water_sealed2.value);
+    }
+
+
+});
+$("#own_toilet_rad2").change(function(event){
+    if (this.checked){
+        var water_sealed = document.getElementById('water_sealed_check');
+        water_sealed.value = 'N/A';
+        var no_toilet1 = document.getElementById('no_toilet_rad1');
+        no_toilet1.value='Shared';
+        var no_toilet2 = document.getElementById('no_toilet_rad2');
+        no_toilet2.value='Communal';
+        var no_toilet3 = document.getElementById('no_toilet_rad3');
+        no_toilet3.value='No-toilet';
+        alert(water_sealed1.value + water_sealed2.value);
+    }
+
+
+});
+//-------garbage
+$("#garbage_collected").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert(this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#garbage_burned").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert(this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#garbage_dumped").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert(this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#garbage_check").change(function(event){
+    if (this.checked){
+        var others = document.getElementById('garbage_others');
+        others.value = '';
+        alert(others.value);
+   } else {
+        var others = document.getElementById('garbage_others');
+        others.value = 'N/A';
+        alert(others.value);
+   }
+});
+//------------------HEM
+$("#beside_highway").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert("beside_highway: "+this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#coastal_area").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert("coastal_area "+this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#near_water").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert("near_water "+this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#hx_landslide").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert("hx_landslide: "+this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#hx_flooding").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert("hx_flooding "+this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#near_mining").change(function(event){
+    if (this.checked){
+        this.value='YES';
+        alert("near_mining "+this.value);
+   } else {
+        this.value='NO';
+        alert(this.value);
+   }
+});
+$("#nearest_evac_specify_check").change(function(event){
+    if (this.checked){
+        var near_evac = document.getElementById("nearest_evac_specify");
+        near_evac.value = '';
+        alert(near_evac.value);
+   } else {
+        var near_evac = document.getElementById("nearest_evac_specify");
+        near_evac.value = 'NO';
+        alert(near_evac.value);
+   }
+});
+function testingButt(){
+    /*var select = document.getElementById("HH_usual_consult_select").value;
+    var others = document.getElementById("HH_usual_consult_others").value;
+
+    var HF_usually_go_for_consult = select + others;
+    alert(HF_usually_go_for_consult);*/
+    
+            }
+        
+
+
+
+        
+        
+                function myFunction() {
+                   
+                 var myVar = setTimeout(showPage,1000);
+                 
+                  
+                }
+                
+                function showPage() {
+                    $("#myDiv").show();
+                    $("#loadermamen").hide();
+                   // document.getElementById("myDiv").style.display = "block";
+                    //document.getElementById("loader").style.display = "none";
+                }
+                </script>
+                
+
+               
+
+    <!--<script src='js/membersform.js'></script>-->
+
+    </body>
+    </html>

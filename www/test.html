@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Data</title>
+        <meta http-equiv="Content-Security-Policy" 
+    content="default-src * 'self' 'unsafe-inline' data: gap: 'unsafe-eval';
+    style-src * 'self' 'unsafe-inline'; 
+    connect-src * ; 
+    script-src * 'self' 'unsafe-inline'; 
+    media-src *">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+        <script type="text/javascript" charset="utf-8" src="js/jquery min-3.3.1.js"></script>
+        <!-- <script type="text/javascript" charset="utf-8" src="js/jquery.mobile-1.4.5.js"></script> -->
+        
+        <script type="text/javascript" src="js/angular.min.js"></script>
+        <script src="js/scopedata.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/data.js"></script>
+        
+        <script type="text/javascript">
+            $(document).ready(function(e) {
+                $('#header').load('header.html');
+                init();
+                $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+                });
+
+
+            });
+        </script>
+        <link type="text/css" rel="stylesheet" href="css/loader.css">
+        <link type="text/css" rel="stylesheet" href="css/bootstrap.css">
+    </head>
+
+    <body onload="myFunction();" class="bg-light" ng-app="demoApp" ng-controller="mainController" >
+            <div id="loadermamen">
+                    <div class="containerloader">
+                           
+                    <div class="dot-container">
+                        <img height="25" alt="ihps" src="img/nav-logo.png" />
+                        <div class="dot dot-1"></div>
+                        <div class="dot dot-2"></div>
+                        <div class="dot dot-3"></div>
+                        
+                    </div>
+                    </div>
+            </div>
+        <div id="myDiv">
+        <div id="header"></div><br/><br/><br/>
+        <div class="container" id='jumbo'>
+
+                <div class="jumbotron">
+                        <div class='center_mo'><h1>No <span class='glyphicon glyphicon-home'></span> Household yet.</h1></div>
+                <div class='center_mo'><a class=' form-control btn-primary' onclick="$('#navbar_baby').click()"> Tap to add <span class='glyphicon glyphicon-home'></span></a></div>
+                
+                </div>
+                
+                </div>
+        <div class='container' id='search_div'>
+            <div class="input-group">
+                <input type="text" id='myInput' class="form-control" placeholder="Search in tables">
+                <span class="input-group-addon"><span class='glyphicon glyphicon-search'></span></span>
+                
+                
+                
+                </div>
+                <hr>
+        </div>
+        <div class='container' ng-show='show_back'>
+            <div class='row'>
+                <div class='col-xs-4'>
+                    <a onclick='goback();'><h4>Go back</h4></a>
+                </div>
+            </div>
+        </div>
+        
+        <input type='checkbox' style='display:none;' id='show_back' ng-model='show_back'>
+        <div class='container'>
+        <!-- <button class='btn btn-primary' onclick="disable();">disable</button> -->
+        
+        
+         
+        
+        <input type='checkbox' style='display:none;' id='check_members' ng-model='check_members'>
+        <input type='checkbox' style='display:none;' id='table_mamen' ng-model='table_mamen'>
+        <input type='checkbox' style='display:none;' id='table_mamen_member' ng-model='table_mamen_member'>
+        <div id = "showtable">
+        <legend><span class='glyphicon glyphicon-home'></span>&nbsp;My Households</legend>
+        <div  class='table-responsive'>
+            
+
+        <table id="tblData" class='table' ></table>
+        
+
+        
+        </div>
+        </div>
+        <div ng-show='check_members'>
+        <div id = "showtable_members">
+        <legend><span class='glyphicon glyphicon-user'></span>&nbsp;Members</legend>
+        <div class='table-responsive'>
+        
+        
+        
+
+            <table id="tblData_members" class='table' ></table>
+                
+        
+                
+        </div>
+        </div>
+     </div>
+
+        
+
+       
+
+        <div  ng-show='table_mamen'>
+        <div id = "updateThis" class='table-responsive'>
+        </div>
+        <div id = 'updateButton' class='container'></div>
+        
+        
+        </div>
+        <div  ng-show='table_mamen_member'>
+        <div id = "updateThis_member" class='table-responsive'>
+        </div>
+        <div id = 'updateButton_member' class='container'></div>
+        
+        
+        </div>
+        </div>
+
+        </div>
+        <input type='checkbox' style='display:none;' ng-model='mamen' id='mamen'>
+        <div id='show_member' class='container' ng-show='mamen'>
+            <div  ng-include="'members/members2.html'" class='container'></div>
+        </div><br>
+
+
+        <!--MODAL-->
+
+        <button style='display:none;' data-toggle="modal" data-target="#myModalHorizontal" id='modal_button'></button>
+
+        <div class="modal fade" id="myModalHorizontal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <button type="button" class="close" id='close_modal' data-dismiss="modal">
+                               <span aria-hidden="true">&times;</span>
+                               <span class="sr-only">Close</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            For security, please fill the form below.
+                        </h4>
+                    </div>
+                    
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        
+                        <form class="form-horizontal" role="form" id='uploadForm' action='post'>
+                          <div class="form-group">
+                            <label  class="col-sm-2 control-label"
+                                      for="uploadEmail">Email</label>
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" name='uploadEmail' id="uploadEmail" placeholder="Email" required/>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-sm-2 control-label"
+                                  for="uploadPassword" >Password</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" name='uploadPassword' id="uploadPassword" placeholder="Password" required/>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="col-xs-12">
+                                <div class='row'>   
+                                    <div class='col-xs-4'></div>
+                                    <div class='col-xs-4'></div>
+                                    <div class='col-xs-4'><input type="submit" class="btn btn-primary"value='Upload' onclick='$("#close_modal").click();'/></div>
+                                 </div>
+                            </div>
+                            </div>
+                        
+                        </form> 
+                    </div>
+                    
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id='modalClose'>Close</button>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="result"></div>
+        <input type='hidden' id='ctrlReff'>
+
+
+        
+
+
+
+
+        <script>
+
+                    $(document).ready(function(){
+                     $("#uploadForm").submit( function () {
+                     $.post(
+                     'https://ihps.app/testingdata',
+                     $("#uploadForm").serialize(),
+                    
+                     function(){
+
+                     })
+                     .done(function(data){
+                         
+                         if (data == 'User Unidentified!'){
+                            var test = $('#ctrlReff').val();
+                            alert(data);
+                            EraseForm();
+                            $('#ctrlReff').val('');
+                         }
+                         else{
+                            $("#close_modal").click();
+                            var test = $('#ctrlReff').val();
+                            //alert('Uploading... ' + data.uploader);
+                            
+                            aaron(test,data.uploader,data.createdby);
+                            EraseForm();
+                            
+                         }
+                     })
+                     .fail(function() {
+                        alert( "Upload failed! Check Internet Connection" );
+                    });
+                   
+                     return false;
+                     });
+                     });
+
+
+                   
+
+                     function EraseForm(){
+                        $('#uploadEmail').val('');
+                        $('#uploadPassword').val('');
+                     }
+             
+        
+        
+                function myFunction() {
+                   
+                 var myVar = setTimeout(showPage,2000);
+                 
+                  
+                }
+                
+                function showPage() {
+                    $("#myDiv").show();
+                    $("#loadermamen").hide();
+                   // document.getElementById("myDiv").style.display = "block";
+                    //document.getElementById("loader").style.display = "none";
+                }
+                function goback(){
+                    $('#showtable').show();
+                    $('#showtable_members').show();
+                    $('#search_div').show();
+                    $('#show_back').click();
+                    
+                    if($('#table_mamen').prop('checked')){
+                        $('#table_mamen').click();
+                    }
+                    else if($('#mamen').prop('checked')){
+                        $('#mamen').click();
+                    }
+                    else{
+                        $('#table_mamen_member').click();
+                    }
+                    
+                    
+        
+                    
+
+                    
+
+                }
+        
+
+      
+         
+                
+                /* $("#table_mamen").change(function(event){
+                    if (this.checked){
+                        $('#table_mamen').attr('unchecked', false);
+                        alert('table_mamen unchecked');
+                        $('#table_mamen_member').attr('unchecked', false);
+                        aler('table_mamen_member unchecked');
+                    } else {}
+                    });
+
+                    $("#table_mamen_member").change(function(event){
+                    if (this.checked){
+                        $('#table_mamen').attr('unchecked');
+                    alert('table_mamen unchecked');
+                    $('#table_mamen_member').attr('unchecked');
+                        alert('table_mamen_member unchecked');
+                    } else {}
+                    }); */
+                </script>
+    </body>
+</html>
